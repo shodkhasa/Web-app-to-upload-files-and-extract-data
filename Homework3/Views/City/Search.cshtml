@@ -1,0 +1,27 @@
+﻿@model List<IGrouping <DateTime, CityDailyCaseData >>
+
+<h3>The result for the search "@ViewBag.searchString" :</h3>
+
+<h6>Latest number available for @Model.First().Key.ToShortDateString()</h6>
+<table class="table table-hover table-responsive">
+    <tr>
+        <th role="row">Name</th>
+        @*<th role="row">Date</th>*@
+        <th role="row">Cases</th>
+        <th role="row">Death</th>
+        <th role="row">Test</th>
+
+    </tr>
+    
+    @*<td></td>*@
+    @foreach (var city in @Model.First())
+    {
+        <tr>
+            <td>@city.Name</td>
+            <td>@city.Cases</td>
+            <td>@city.Death</td>
+            <td>@city.Test</td>
+
+        </tr>
+    }
+</table>

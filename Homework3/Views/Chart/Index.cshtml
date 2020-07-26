@@ -1,0 +1,104 @@
+﻿@model CityData
+
+<form method="post" class="">
+    <div class="form-group m-1">
+        <label class="align-content-center">Select a City to display: </label>
+        <select asp-for="Id" asp-items="ViewBag.CityList"></select>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+</form>
+
+<h1>@ViewBag.CityPop.Name</h1>
+<h3>Population: @ViewBag.CityPop.Pop</h3>
+
+<table>
+    <thead class="text-center">
+        <tr><th>Cases</th><th>Death</th><th>Test</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div class="ct-chartCases"></div></td>
+            <td><div class="ct-chartDeath"></div></td>
+            <td><div class="ct-chartTest"></div></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-hover">
+    <tr>
+        <th role="row">Date</th>
+        <th role="row">Cases</th>
+        <th role="row">Death</th>
+        <th role="row">Test</th>
+
+    </tr>
+    @foreach (var city in ViewBag.CityListData)
+    {
+
+        <tr>
+            <td>@city.Date.ToShortDateString()</td>
+            <td>@city.Cases</td>
+            <td>@city.Death</td>
+            <td>@city.Test</td>
+
+        </tr>
+    }
+</table>
+
+@section StyleSheets{
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+}
+
+@section Scripts{
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"
+            integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q=="
+            crossorigin="anonymous"></script>
+    <script>
+        var data = {
+            labels: @Json.Serialize(ViewBag.Dates),
+            series: [@Json.Serialize(ViewBag.Cases)]
+        };
+
+        var options = {
+            width: '300px',
+            height: '200px',
+            axisY: { onlyInteger: true },
+            type: Chartist.AutoScaleAxis
+        };
+
+    new Chartist.Line(".ct-chartCases", data, options);
+    </script>
+
+    <script>
+        var data = {
+            labels: @Json.Serialize(ViewBag.Dates),
+            series: [@Json.Serialize(ViewBag.Death)]
+        };
+
+        var options = {
+            width: '300px',
+            height: '200px',
+            axisY: { onlyInteger: true },
+            type: Chartist.AutoScaleAxis
+        };
+
+        new Chartist.Line(".ct-chartDeath", data, options);
+    </script>
+
+    <script>
+        var data = {
+            labels: @Json.Serialize(ViewBag.Dates),
+            series: [@Json.Serialize(ViewBag.Test)]
+        };
+
+        var options = {
+            width: '300px',
+            height: '200px',
+            axisY: { onlyInteger: true },
+            type: Chartist.AutoScaleAxis
+        };
+
+    new Chartist.Line(".ct-chartTest", data, options);
+    </script>
+}

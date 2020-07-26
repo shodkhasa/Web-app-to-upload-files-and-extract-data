@@ -1,0 +1,22 @@
+﻿@model List<CityData>
+
+<h3>Los Angeles City Name and Population</h3>
+
+<table class="table table-hover table-active">
+    <tr class="text-capitalize">
+        <th role="row" >CITY</th>
+        <th role="row">POPULATION</th>
+    </tr>
+    @foreach (var city in Model)
+    {
+
+<tr>
+    <td>
+        <a asp-controller="Chart" asp-action="Index" asp-route-id="@city.Id">
+            @city.Name
+        </a>
+    </td>
+    <td>@city.Pop</td>
+</tr>
+    }
+</table>

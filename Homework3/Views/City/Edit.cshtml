@@ -1,0 +1,14 @@
+﻿@model CityData
+
+<p>LA County Cities - Edit</p>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Pop">Population</label>
+        <input asp-for="Pop" asp-items="ViewBag.Pop" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

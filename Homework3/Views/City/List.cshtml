@@ -1,0 +1,30 @@
+﻿@model CityData
+
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1 class="display-4">COVID-19 Cases</h1>
+            <p>Cases Detail for Covid 19 for Los Angeles</p>
+        </div>
+
+        <div class="container">
+            <form method="post" class="form-group">
+                <div class="form-group m-1 ">
+                    <p class="align-content-center"><a asp-controller="Files" asp-action="Upload" class="btn btn-outline-success">Import File</a></p>
+                </div>
+                <div class="form-group m-1">
+                    <label class="align-content-center">Select a City to display: </label>
+                    <select asp-for="Id" asp-items="ViewBag.CityList"></select>
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <form asp-controller="City" asp-action="Search" class="form-group">
+                <div class="form-group m-1 w-50">
+                    <label class="align-content-center">Search for a City : </label>
+                    <input type="text" name="SearchString" placeholder="for the last data available" class="col-6">
+                    <input type="submit" value="Go" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
